@@ -1,54 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
+<title>CYBER PORTFOLIO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-body {
+:root {
+  --cyan: #00f5ff;
+  --pink: #ff00aa;
+  --purple: #9d00ff;
+  --bg: #080812;
+}
+
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #101827;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
   color: white;
+  font-family: 'Kanit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0,245,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    rgba(0,0,0,.10) 2px,
+    transparent 4px
+  );
+}
+
+/* NAVBAR */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(8,8,18,.85);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(0,245,255,.3);
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--cyan);
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px var(--cyan);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 14px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: var(--pink);
+  text-shadow: 0 0 12px var(--pink);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 130px 20px 70px;
+}
+
+.tag {
+  color: var(--pink);
+  border: 1px solid var(--pink);
+  padding: 8px 20px;
+  letter-spacing: 3px;
+  font-size: 12px;
+  box-shadow: 0 0 15px rgba(255,0,170,.3);
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(35px, 8vw, 85px);
+  font-weight: 900;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan),
+               0 0 35px var(--cyan);
+  animation: glitch 3s infinite;
+}
+
+.hero h2 {
+  font-size: 22px;
+  color: var(--pink);
+  margin: 15px 0;
+}
+
+.hero p {
+  color: #aaa;
+  max-width: 600px;
+  line-height: 2;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 14px 35px;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: .3s;
+}
+
+.btn:hover {
+  color: black;
+  background: var(--cyan);
+  box-shadow: 0 0 30px var(--cyan);
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 10%;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: 30px;
+  color: var(--cyan);
+  text-shadow: 0 0 15px var(--cyan);
+  margin-bottom: 50px;
+}
+
+.panel {
+  max-width: 850px;
+  margin: auto;
+  padding: 35px;
+  background: rgba(20,20,40,.8);
+  border: 1px solid rgba(0,245,255,.4);
+  box-shadow: 0 0 25px rgba(0,245,255,.08);
+  clip-path: polygon(0 0, 97% 0, 100% 10%, 100% 100%, 3% 100%, 0 90%);
+}
+
+.panel p {
+  color: #ccc;
+  line-height: 2;
   text-align: center;
 }
-header {
-  padding: 80px 20px;
-  background: #1e293b;
+
+/* SKILLS */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
 }
-h1 { color: #60a5fa; font-size: 40px; }
-section { padding: 30px; margin: 20px auto; max-width: 650px; background: #1e293b; border-radius: 15px; }
-p { color: #cbd5e1; line-height: 1.8; }
+
+.skill {
+  padding: 20px 30px;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  background: rgba(255,0,170,.05);
+  transition: .3s;
+}
+
+.skill:hover {
+  background: var(--pink);
+  color: black;
+  box-shadow: 0 0 25px var(--pink);
+  transform: translateY(-5px);
+}
+
+/* PROJECTS */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 25px;
+}
+
+.project {
+  padding: 30px;
+  background: #111122;
+  border: 1px solid var(--purple);
+  transition: .3s;
+}
+
+.project:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px var(--purple);
+}
+
+.project h3 {
+  color: var(--cyan);
+  margin-bottom: 15px;
+}
+
+.project p {
+  color: #aaa;
+  line-height: 1.8;
+}
+
+/* CONTACT */
+.contact {
+  text-align: center;
+}
+
+.contact a {
+  color: var(--pink);
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  border-top: 1px solid rgba(0,245,255,.3);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(2px,-2px); }
+  94% { transform: translate(-2px,2px); }
+  96% { transform: translate(2px,1px); }
+}
+
+@media(max-width:600px) {
+  nav { padding: 15px 5%; }
+  nav a { margin-left: 8px; font-size: 11px; }
+  section { padding: 75px 6%; }
+  .panel { padding: 25px 18px; }
+}
 </style>
 </head>
+
 <body>
 
-<header>
-<h1>MY PORTFOLIO</h1>
-<h2>my name is Finale</h2>
-<p>ยินดีต้อนรับเข้าสู่เว็บไซต์ Portfolio ของฉัน</p>
+<nav>
+  <div class="logo">CYBER.DEV</div>
+  <div>
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#projects">WORK</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="tag">WELCOME TO MY DIGITAL WORLD</div>
+  <h1>YOUR NAME</h1>
+  <h2>CYBER // CREATIVE DEVELOPER</h2>
+  <p>
+    สวัสดี! ยินดีต้อนรับสู่โลกดิจิทัลของฉัน
+    เว็บไซต์นี้รวบรวมประวัติ ทักษะ และผลงานของฉัน
+  </p>
+  <a href="#about" class="btn">ENTER SYSTEM →</a>
 </header>
 
-<section>
-<h2>About Me</h2>
-<p>ฉันเป็นนักเรียนที่สนใจด้านเทคโนโลยีและการออกแบบเว็บไซต์</p>
+<section id="about">
+  <h2 class="title">// ABOUT ME</h2>
+  <div class="panel">
+    <p>
+      สวัสดี ฉันชื่อ YOUR NAME<br>
+      ฉันเป็นนักเรียน / นักศึกษา ที่สนใจเทคโนโลยี
+      การเขียนโปรแกรม และการออกแบบเว็บไซต์<br>
+      ฉันชอบเรียนรู้สิ่งใหม่ ๆ และสร้างสรรค์ผลงาน
+      ในโลกดิจิทัล
+    </p>
+  </div>
 </section>
 
-<section>
-<h2>My Skills</h2>
-<p>HTML | CSS | JavaScript</p>
+<section id="skills">
+  <h2 class="title">// MY SKILLS</h2>
+  <div class="skills">
+    <div class="skill">HTML</div>
+    <div class="skill">CSS</div>
+    <div class="skill">JAVASCRIPT</div>
+    <div class="skill">DESIGN</div>
+    <div class="skill">CREATIVE</div>
+  </div>
 </section>
 
-<section>
-<h2>My Projects</h2>
-<p>ผลงานของฉันจะอยู่ที่นี่</p>
+<section id="projects">
+  <h2 class="title">// MY PROJECTS</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>PROJECT_01</h3>
+      <p>เว็บไซต์แนะนำตัวของฉัน</p>
+    </div>
+    <div class="project">
+      <h3>PROJECT_02</h3>
+      <p>ผลงานออกแบบเว็บไซต์</p>
+    </div>
+    <div class="project">
+      <h3>PROJECT_03</h3>
+      <p>โปรเจกต์ส่วนตัวของฉัน</p>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>Contact</h2>
-<p>Email: your@email.com</p>
+<section id="contact">
+  <h2 class="title">// CONTACT ME</h2>
+  <div class="panel contact">
+    <p>LET'S CONNECT TOGETHER</p>
+    <p>Email: YOUR_EMAIL</p>
+    <p>Facebook: YOUR_FACEBOOK</p>
+  </div>
 </section>
+
+<footer>
+  © 2026 CYBER PORTFOLIO // SYSTEM ONLINE
+</footer>
 
 </body>
 </html>
